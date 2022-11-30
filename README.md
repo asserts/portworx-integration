@@ -26,12 +26,6 @@ and change: `-namespaces=kube-system` to `-namespaces=kube-system,asserts`
 
 ### Prometheus Scrape itself
 
-Label the px-prometheus service so the ServiceMonitor can pick it up:
-
-```
-kubectl label service px-prometheus app=px-prometheus -n kube-system
-```
-
 Create a service for the purposes of scraping prometheus since Portworx Operator will undo live
 changes to the existing prometheus service. It has no labels which are required to scrape it.
 
@@ -46,6 +40,8 @@ Apply the prometheus ServiceMonitor:
 ```
 kubectl apply -f manifests/prometheus-servicemonitor.yaml
 ```
+
+> **Note**: normally we would just run `kubectl label service px-prometheus app=px-prometheus -n kube-system` to label the existing prometheus service.
 
 ### Scraping kubelet metrics
 
@@ -122,6 +118,11 @@ Configure your Prometheus DataSource which Asserts will connect to
 and query by following [these instructions](https://docs.asserts.ai/integrations/data-source/prometheus)
 
 For Portworx-Operator you can set the url to `http://px-prometheus.kube-system.svc.cluster.local:9090`
+
+
+## Import Dashboards
+
+3 Portworx dashboards have been modified to work with Grafana v9+. Simple import the dashboards in the `dashboards` directory. Then from here, you can link the Dashboards to Asserts Entities.
 
 
 ## Uninstalling the Chart
