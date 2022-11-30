@@ -1,6 +1,6 @@
 # Portworx Asserts Integration (Portworx Operator)
 
-This is will show the full Asserts<>Portworx intergration by configuring existing
+This will show the full Asserts<>Portworx intergration by configuring existing
 services Portworx ships with as well as adding supplemental exporters to produce
 more metrics about the kubernetes cluster and its nodes.
 
@@ -9,17 +9,7 @@ more metrics about the kubernetes cluster and its nodes.
 
 This assumes Portworx is being or has been installed via the Portworx Operator version 2.11
 
-Install the Portworx Operator:
-
-```
-kubectl apply -f 'https://install.portworx.com/2.11?comp=pxoperator'
-```
-
-Install other Portworx Services:
-
-```
-kubectl apply -f 'https://install.portworx.com/2.11?operator=true&mc=false&b=true&kd=type%3Dpd-standard%2Csize%3D150&s=%22type%3Dpd-standard%2Csize%3D150%22&c=px-cluster-4d683bc9-5dc7-4c94-8819-2b71fd6bba70&gke=true&stork=true&csi=true&mon=true&tel=false&st=k8s&promop=true'
-```
+Install the Portworx Operator
 
 
 ## Configuring Existing Portworx Resources
@@ -37,7 +27,7 @@ kubectl edit deployment px-prometheus-operator -n kube-system
 Label the px-prometheus service so the ServiceMonitor can pick it up:
 
 ```
-kubectl label service px-prometheus app=px-prometheus
+kubectl label service px-prometheus app=px-prometheus -n kube-system
 ```
 
 Apply the prometheus ServiceMonitor:
@@ -116,12 +106,14 @@ And opening your browser to [http://localhost:8080](http://localhost:8080)
 you will be directed to the Asserts Registration page. There you can acquire
 a license as seen [here](https://docs.asserts.ai/getting-started/self-hosted/helm-chart#see-the-data)
 
-## Configuring Promethueus DataSources
+
+## Configuring Prometheus DataSources
 
 Configure your Prometheus DataSource which Asserts will connect to
 and query by following [these instructions](https://docs.asserts.ai/integrations/data-source/prometheus)
 
 For Portworx-Operator you can set the url to `http://px-prometheus.kube-system.svc.cluster.local:9090`
+
 
 ## Uninstalling the Chart
 
