@@ -89,7 +89,7 @@ helm upgrade --install node-exporter prometheus-community/prometheus-node-export
 
 ## Installing Asserts
 
-Install:
+Add Repo and Install:
 
 ```
 helm repo add asserts https://asserts.github.io/helm-charts
