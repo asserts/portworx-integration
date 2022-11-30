@@ -117,7 +117,11 @@ a license as seen [here](https://docs.asserts.ai/getting-started/self-hosted/hel
 Configure your Prometheus DataSource which Asserts will connect to
 and query by following [these instructions](https://docs.asserts.ai/integrations/data-source/prometheus)
 
-For Portworx-Operator you can set the url to `http://px-prometheus.kube-system.svc.cluster.local:9090`
+For Portworx-Operator you can set the url to:
+
+```
+http://px-prometheus.kube-system.svc.cluster.local:9090
+```
 
 
 ## Import Dashboards
