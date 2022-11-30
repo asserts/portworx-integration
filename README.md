@@ -32,6 +32,15 @@ Label the px-prometheus service so the ServiceMonitor can pick it up:
 kubectl label service px-prometheus app=px-prometheus -n kube-system
 ```
 
+Create a service for the purposes of scraping prometheus since Portworx Operator will undo live
+changes to the existing prometheus service. It has no labels which are required to scrape it.
+
+Create the extra prometheus service:
+
+```
+kubectl apply -f manifests/prometheus-service.yaml
+```
+
 Apply the prometheus ServiceMonitor:
 
 ```

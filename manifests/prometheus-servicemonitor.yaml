@@ -15,4 +15,4 @@ spec:
     - kube-system
   selector:
     matchLabels:
-      app: px-prometheus
+      app: px-prometheus-service
