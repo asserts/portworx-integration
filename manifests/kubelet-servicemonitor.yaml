@@ -2,8 +2,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app: prometheus-operator-kubelet
-  name: prometheus-operator-kubelet
+    app.kubernetes.io/name: kubelet
+    prometheus: portworx
+  name: kubelet
   namespace: kube-system
 spec:
   endpoints:
@@ -45,4 +46,9 @@ spec:
     tlsConfig:
       caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
       insecureSkipVerify: true
-  jobLabel: k8s-app
+  namespaceSelector:
+    matchNames:
+    - kube-system
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubelet

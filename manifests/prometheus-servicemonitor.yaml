@@ -3,6 +3,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     app: px-prometheus
+    prometheus: portworx
   name: px-prometheus
   namespace: kube-system
 spec:

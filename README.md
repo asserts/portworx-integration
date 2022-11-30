@@ -22,6 +22,8 @@ The Portworx Prometheus-Operator is configured with command line flag `--namespa
 kubectl edit deployment px-prometheus-operator -n kube-system
 ```
 
+and change: `-namespaces=kube-system` to `-namespaces=kube-system,asserts`
+
 ### Prometheus Scrape itself
 
 Label the px-prometheus service so the ServiceMonitor can pick it up:
@@ -36,11 +38,9 @@ Apply the prometheus ServiceMonitor:
 kubectl apply -f manifests/prometheus-servicemonitor.yaml
 ```
 
-and change: `-namespaces=kube-system` to `-namespaces=kube-system,asserts`
-
 ### Scraping kubelet metrics
 
-Apply a ServiceMonitor to allow Prometheus to scrape the kubelet metrics. This will provide cadvisor and well as some other k8s metrics:
+Apply a ServiceMonitor to allow Prometheus to scrape the kubelet metrics. This will provide cadvisor and well as some other k8s metrics. Note that this servicemonitor might need to change depending on the flavor of k8s being installed on. Check the kubelet service's labels with `kubectl get svc kubelet -n kube-system --show-labels` and set the kubelet serviceMonitor's `matchLabels` appropriately.
 
 ```
 kubectl apply -f manifests/kubelet-servicemonitor.yaml
