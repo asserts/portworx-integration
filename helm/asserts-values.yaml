@@ -1,0 +1,35 @@
+# ref values file: https://github.com/asserts/helm-charts/blob/master/charts/asserts/values.yaml
+
+# set global storageClass
+global:
+  storageClass: portworx-sc
+
+# expose ui
+ui:
+  service:
+    type: NodePort
+
+# serviceMonitor enabled by default
+serviceMonitor:
+  # set to match portworx's prometheus-operator serviceMonitorSelector
+  #
+  # run to view:
+  # kubectl get prometheus -n kube-system -ojsonpath="{.items[].spec.serviceMonitorSelector}
+  extraLabels:
+    prometheus: portworx
+
+# passwords set here for dev purposes
+# avoids running into credential error
+# when upgrading as seen here:
+#
+# https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases
+postgres:
+  global:
+    postgresql:
+      auth:
+        postgresPassword: px-secret
+
+grafana:
+  auth:
+    password: px-secret
+

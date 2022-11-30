@@ -1,0 +1,15 @@
+prometheus:
+  monitor:
+    enabled: true
+    additionalLabels:
+      prometheus: portworx
+    honorLabels: true
+
+metricLabelsAllowlist:
+  - nodes=[*]
+  - services=[app, app.kubernetes.io/name, k8s-app,
+              component, app.kubernetes.io/component,
+              eks.amazonaws.com/component, app.kubernetes.io/managed-by]
+  - pods=[app, app.kubernetes.io/name, k8s-app,
+          component, app.kubernetes.io/component,
+          eks.amazonaws.com/component, app.kubernetes.io/managed-by
