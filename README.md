@@ -9,7 +9,7 @@ more metrics about the kubernetes cluster and its nodes.
 
 This assumes Portworx is being or has been installed via the Portworx Operator version 2.11
 
-Install the Portworx Operator
+See [Install Portworx](https://docs.portworx.com/install-portworx/)
 
 
 ## Configuring Existing Portworx Resources
