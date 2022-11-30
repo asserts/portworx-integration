@@ -84,7 +84,7 @@ helm upgrade --install kube-state-metrics prometheus-community/kube-state-metric
 Install:
 
 ```
-helm upgrade --install node-exporter prometheus-community/prometheus-node-exporter -f helm/node-exporter-values.yaml
+helm upgrade --install node-exporter prometheus-community/prometheus-node-exporter -f helm/node-exporter-values.yaml -n kube-system
 ```
 
 ## Installing Asserts
