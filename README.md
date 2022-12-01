@@ -66,7 +66,6 @@ Add the prometheus-community helm repo:
 
 ```
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-
 ```
 
 Install:
@@ -98,13 +97,13 @@ helm install asserts asserts/asserts -n asserts -f helm/asserts-values.yaml --cr
 Once all containers are initialized and running:
 
 ```bash
-kubectl get pods -l app.kubernetes.io/instance=asserts
+kubectl get pods -l app.kubernetes.io/instance=asserts -n asserts
 ```
 
 You can then login to the asserts-ui by running:
 
 ```bash
-kubectl port-forward svc/asserts-ui 8080
+kubectl port-forward svc/asserts-ui 8080 -n asserts
 ```
 
 And opening your browser to [http://localhost:8080](http://localhost:8080)
@@ -134,7 +133,7 @@ http://px-prometheus.kube-system.svc.cluster.local:9090
 To uninstall/delete the `asserts` deployment:
 
 ```console
-helm delete asserts
+helm delete asserts -n asserts
 ```
 
 The command removes all the Kubernetes components but PVC's associated with the chart and deletes the release.
@@ -142,7 +141,7 @@ The command removes all the Kubernetes components but PVC's associated with the 
 To delete the PVC's associated with `asserts`:
 
 ```bash
-kubectl delete pvc -l app.kubernetes.io/instance=asserts
+kubectl delete pvc -l app.kubernetes.io/instance=asserts -n asserts
 ```
 
 > **Note**: Deleting the PVC's will delete all asserts related data as well. 
