@@ -32,8 +32,3 @@ postgres:
 grafana:
   auth:
     password: px-secret
-
-
-server:
-  image:
-    tag: vtest-entity
